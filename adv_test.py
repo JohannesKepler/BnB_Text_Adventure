@@ -2,6 +2,7 @@
 ### as it stands, the code is FUNCTIONAL, strictly speaking, but there is a big flaw. Each room reciprocates orientation to one another, but they don't see their own NEIGHBORS' neighbors. So if blue builds itself west of cyan, and then yellow builds itself north of blue, yellow doesn't realize it is northwest of cyan. Although... maybe I don't want it to be connected like that? It doesn't have to be, now that I think about it... hmm...
 # testing making changes!
 # another change test!
+# once more
 
 import random
 
