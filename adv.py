@@ -1,7 +1,6 @@
 import random
 
 #abida is here!
-#try to edit again.
 # when you call cardinals[i] on a room, you can call
 # opposing[i] on the other so they are correctly oriented
 cardinals = ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"]
