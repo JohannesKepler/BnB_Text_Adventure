@@ -9,6 +9,29 @@ opposing = ["south", "southwest", "west", "northwest", "north", "northeast", "ea
 
 room_names = ["blue", "red", "green", 'yellow', 'white', 'black', 'cyan', 'magenta']
 
+# dir_map takes results from vector_to_dir() func and uses them to map english words
+# to math answers
+dir_map = {
+    "-1.57": 'south',
+    "1.57": 'north',
+    "0.00": 'west',
+    "3.14": 'east',
+    "-2.36": 'southeast',
+    "2.36": 'northeast',
+    "-0.79": 'southwest',
+    "0.79": 'northwest'
+}
+
+# vector_to_dir() func uses dir_map to return an english cardinal direction
+def vector_to_dir(p, q):
+    dist = math.sqrt((p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2)
+    x = math.atan2((p[1] - q[1]), (p[0] - q[0]))
+    y = "%.2f" % x
+    if y in dir_map and dist < 2:
+        return dir_map[y]
+    elif dist >= 2:
+        return None
+
 # dictionary of commands, displayed with help call
 helpful = {'go': "Moves you around. 'go north' or 'move north' are acceptable.",
 'look': "See where you can go based on room layout.",
