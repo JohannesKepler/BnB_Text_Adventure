@@ -1,0 +1,21 @@
+To Change:
+
+-change movement commands to "n", "s", "e", and "w". That's what all the cool kids are doin'.
+
+To Add:
+
+-incorporate random map generator
+
+-incorporate puzzles
+
+-incorporate win state (3 puzzles solved?)
+
+-incorporate story
+
+To Go Further:
+
+-add NPC's that the player can interact with
+
+-add a way to save game state
+
+-add undo button!
