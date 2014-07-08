@@ -1,0 +1,83 @@
+how to implement undo function
+
+def undo():
+    # inputs? outputs?
+
+-create an undo list
+-every time player executes a command, append that command to undo list
+OR
+-append the reverse of that command to undo list (eg, "walk north" appends "walk south")
+
+when undo is called:
+-x = undo_list.pop()
+-getattr(player, x)()
+-using above method, makes more sense to append opposite of executed command to undo list
+
+first things first:
+-implement a good, solid command parser
+-start SIMPLE
+-each command should be 1 or 2 words (holding yourself back by reaching too high, by trying to allow things like "use torch on spider")
+-player_input = raw_input('> ').split()
+-now player_input = [#command word, #command object]
+-getattr(player, player_input[0](player_input[1])
+-the above calls every possible function, without the need for the if-elif wall
+-what happens if len(player_input) == 1?
+
+if len(player_input) == 1:
+    getattr(player, player_input[0])()
+else:
+    getattr(player, player_input[0])(player_input[1])
+
+-each function has same name as command word? this avoids a long if, elif statement
+-but causes trouble if a command word is a builtin python function (eg map)
+
+#inside Player class
+def move(self, dir = None):
+    # using dir = None, the function can be called with or without a direction
+    # specified by the player
+    if dir == None:
+        print "Which way would you like to go?"
+        # maybe also print list of possible options
+        # call function again using dir now specified by player
+    elif dir in dir_list:
+        # modify self.location somehow
+    elif dir not in dir_list:
+        print "I don't think you can go that way. Try one of these:"
+        # print list of possible options
+        # call function again using dir now specified by player
+
+-modify dir_list depending on self.location?
+-maybe whenever player moves, she can grab the direction list from the room she moves to, and keep it in her own self.dir_list
+-so now each room has a dir_list, created according to its neighbors
+-self.dir_list = self.neighbors.values()
+
+Need to recreate map creation
+-this time use grid, but hide grid from player
+-use math (distance function?) to determine neighbors
+eg
+for room in room_list:
+    if dist(self.pos, room.pos) < 2:
+        self.add_neighbor(room)
+
+if the room is ordinally adjacent, dist returns 1
+if the room is diagonally adjacent, dist returns sqrt(2), or 1.414
+anything further, dist returns 2 or greater
+how to determine direction using this method, though?
+craaaap
+vector to angle?
+
+Current plan:
+use combination of distance (checks if neighbor or not) and vector angle (determines direction)
+should work well!
+
+
+method to add new rooms adjacent to existing when using a grid map?
+
+offset_x = random.choice([-1, 0, 1])
+offset_y = random.choice([-1, 0, 1])
+if offset_x == 0 and offset_y == 0:
+    offset_x = random.choice([-1, 0, 1])
+    offset_y = random.choice([-1, 0, 1])
+
+new_room.pos[0] = other_room.pos[0] + offset_x
+new_room.pos[1] - other_room.pos[1] + offset_y
